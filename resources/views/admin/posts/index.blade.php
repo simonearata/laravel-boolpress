@@ -29,7 +29,7 @@
             <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>
           </td>
           <td>
-            <form action="{{ route('admin.destroy', $post) }}" method="POST">
+            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger">DELETE</button>
@@ -39,5 +39,9 @@
       @endforeach
     </tbody>
   </table>
+
+  <div>
+      {{ $posts->links() }}
+    </div>
 </div>
 @endsection

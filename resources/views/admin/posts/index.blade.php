@@ -23,7 +23,13 @@
         <tr>
           <td>{{ $post->id }}</td>
           <td>{{ $post->title }}</td>
-          <td>{{ $post->category->name }}</td>
+          <td>
+            @if ($post->category)
+              {{ $post->category->name }}
+            @else
+              -
+            @endif
+          </td>
           <td>
             <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-success">SHOW</a>
           </td>
@@ -40,7 +46,20 @@
         </tr>
       @endforeach
     </tbody>
-  </table>
+  </table> 
+
+  @foreach($categories as $category)
+    <h3>{{ $category->name }}</h3>
+    <ul>
+      @forelse ($category->posts as $post_category)
+        <!-- viene stampato quello che trovo -->
+        <li>{{ $post_category->title }}</li>
+      @empty
+        <!-- se non trovo nulla stampo quello che metto qui -->
+        <li>nessun post presente</li>
+      @endforelse
+    </ul>
+  @endforeach
 
   <div>
       {{ $posts->links() }}

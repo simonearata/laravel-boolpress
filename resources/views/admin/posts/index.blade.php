@@ -14,6 +14,7 @@
       <tr>
         <th>ID</th>
         <th>Title</th>
+        <th>Categoria</th>
         <th colspan="3">Actions</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <tr>
           <td>{{ $post->id }}</td>
           <td>{{ $post->title }}</td>
+          <td>{{ $post->category->name }}</td>
           <td>
             <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-success">SHOW</a>
           </td>

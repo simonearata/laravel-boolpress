@@ -55,6 +55,16 @@
         @enderror
       </div>
 
+      <div class="mb-3">
+        <h5>Tag</h5>
+        @foreach($tags as $tag)
+          <span class="d-inline-block mr-3">
+            <input type="checkbox" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}" name="tags[]">
+            <label for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
+          </span>
+        @endforeach
+      </div>
+
       <div>
         <button class="btn btn-success" type="submit">Invio</button>
         <button class="btn btn-secondary" type="reset">Reset</button>

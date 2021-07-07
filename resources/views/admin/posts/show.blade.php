@@ -11,6 +11,11 @@
       nessuna categoria assocciata
     @endif
   </h3>
+  <div>
+    @foreach($post->tags as $tag)
+      <span class="badge badge-primary">{{ $tag->name }}</span>
+    @endforeach
+  </div>
   <p>{{ $post->content }}</p>
   <div>
     <a class="btn btn-success" href="{{ route('admin.posts.edit', $post) }}">EDIT</a>

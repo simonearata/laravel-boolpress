@@ -59,10 +59,14 @@
         <h5>Tag</h5>
         @foreach($tags as $tag)
           <span class="d-inline-block mr-3">
-            <input type="checkbox" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}" name="tags[]">
+            <input type="checkbox" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}" name="tags[]" 
+            @if (in_array($tag->id, old('tags',[]))) checked @endif>
             <label for="tag{{ $loop->iteration }}">{{ $tag->name }}</label>
           </span>
         @endforeach
+        @error('tags')
+          <p class="text-danger">{{ $message }}</p>
+        @enderror
       </div>
 
       <div>

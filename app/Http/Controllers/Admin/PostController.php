@@ -67,6 +67,12 @@ class PostController extends Controller
         $new_post->fill($data);
         $new_post->save();
 
+        // se esiste la chiave tags dentro $data ed esiste solo se ho checkato qualcosa
+        if(array_key_exists('tags',$data)){
+
+            // popolo la tabella pivot con la chiave del post e le chiavi dei tags
+            $new_post->tags()->attach($data['tags']);
+        }
         
 
         return redirect()->route('admin.posts.show', $new_post);
@@ -96,12 +102,13 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $tags = Tag::all();
         $categories = Category::all();
 
         if(!$post){
             abort(404);
         }
-        return view('admin.posts.edit', compact('post','categories'));
+        return view('admin.posts.edit', compact('post','categories','tags'));
     }
 
     /**
@@ -134,6 +141,15 @@ class PostController extends Controller
 
 
         $post->update($data);
+
+        
+        if(array_key_exists('tags',$data)){
+
+            $post->tags()->sync($data['tags']);
+        }else{
+            $post->tags()->detach();
+        }
+
         return redirect()->route('admin.posts.show', $post);
     }
 

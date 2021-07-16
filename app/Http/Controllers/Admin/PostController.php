@@ -125,7 +125,7 @@ class PostController extends Controller
         if($post->title !== $data['title']){
 
             $slug = Str::slug($data['title'], '-');
-            $slug_exist = Post::where('slug',$data['slug'])->first();
+            $slug_exist = Post::where('slug',$slug )->first();
             $counter = 0;
             while($slug_exist){
                 $title = $data['title'] . '-' . $counter;
